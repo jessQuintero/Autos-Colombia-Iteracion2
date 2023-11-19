@@ -47,7 +47,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="clave">Clave</label>
-                                        <input type="password" class="form-control" name="clave" pattern="[A-Za-z][A-Za-z0-9]*[0-9][A-Za-z0-9]*" required value="${usuario.clave}">
+                                        <input type="password" class="form-control" name="clave" placeholder="Minimo 6 caracter entre Mayuscula, minuscula y numeros" pattern="[A-Za-z][A-Za-z0-9]*[0-9][A-Za-z0-9]*" required value="${usuario.clave}">
                                     </div>
                                     
                                 </div>

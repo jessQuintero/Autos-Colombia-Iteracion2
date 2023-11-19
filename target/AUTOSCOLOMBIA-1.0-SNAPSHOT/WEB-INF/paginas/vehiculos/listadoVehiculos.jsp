@@ -2,7 +2,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="es_MX"/>
 
-<section id="clientes">
+<section id="vehiculos">
     <div class="container">
         <div class="row">
             <div class="col-md-9">

@@ -1,4 +1,7 @@
 <header id="main-header" class="py-2 bg-info text-white">
+    
+
+    
   <div class="container">
         <div class="row">
             <div class="col-md-6">
@@ -10,11 +13,16 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="bitacora.jsp">Modulo Bitacora</a>
-        <a class="nav-link" href="clientes.jsp">Modulo Cliente</a>
-        <a class="nav-link" href="vehiculos.jsp">Modulo Vehiculo</a>
-        <a class="nav-link" href="usuarios.jsp">Modulo Usuario</a>
-        <a class="nav-link" href="UsuarioServlet?tipo=cerrarSesion">Cerrar sesión</a>
+          
+         
+        <a class="nav-link" href="BitacoraServlet?accion=listar">Modulo Bitacora</a>
+        <a class="nav-link" href="CeldaServlet?accion=listar">Modulo Celda</a>
+        <a class="nav-link" href="ClienteServlet?accion=listar">Modulo Cliente</a>
+        <a class="nav-link" href="VehiculoServlet?accion=listar">Modulo Vehiculo</a>
+        <a class="nav-link" href="UsuarioServlet?accion=listar">Modulo Usuario</a>
+        
+                      
+                    
       </div>
     </div>
   </div>

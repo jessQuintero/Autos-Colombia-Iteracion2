@@ -16,6 +16,7 @@
         <script src="https://kit.fontawesome.com/f90d3bf50d.js" crossorigin="anonymous"></script>
         
         
+          
           <!--Cabecero-->
       
         <title>Pagina de Principal</title>
@@ -25,9 +26,8 @@
         <!--Cabecero-->
         <jsp:include page="WEB-INF/paginas/comunes/cabecero.jsp"/>
           
-	Bienvenido Usuario Cedula No ${sessionScope.usuario.cedula}
-        
-        
+	
+       
         <jsp:include page="WEB-INF/paginas/comunes/piePagina.jsp"/>  
     </body>
 </html>

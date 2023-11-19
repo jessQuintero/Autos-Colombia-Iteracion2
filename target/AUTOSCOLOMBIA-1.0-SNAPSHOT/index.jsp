@@ -17,6 +17,8 @@
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         
         
+        
+             
         <title>Pagina de Login</title>
     </head>
     <body>
@@ -39,12 +41,12 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="cedula">Cedula</label>
-                                        <input type="number" class="form-control" name="cedula" required value="${usuario.cedula}">
+                                        <input type="number" class="form-control" name="cedula" required>
                                     </div>
                                    
                                     <div class="form-group">
                                         <label for="clave">Clave</label>
-                                        <input type="password" class="form-control" name="clave" required value="${usuario.clave}">
+                                        <input type="password" class="form-control" name="clave" required ">
                                     </div>
                                     
                                     <div class="modal-footer">
