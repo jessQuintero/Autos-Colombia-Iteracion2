@@ -14,7 +14,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="cedula">Cedula Ciudadania</label>
-                        <input type="number" class="form-control" name="cedula" min="1000000" max="9999999999" required>
+                        <input type="number" class="form-control" name="cedula" required>
                     </div>
                     <div class="form-group">
                         <label for="nombre">Nombre</label>
@@ -31,7 +31,7 @@
                     </div>
                     <div class="form-group">
                         <label for="clave">Clave</label>
-                        <input type="password" class="form-control" name="clave" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" required>
+                        <input type="password" class="form-control" placeholder="Minimo 6 caracter entre Mayuscula, minuscula y numeros" name="clave" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" required>
                     </div>
                    
                 </div>

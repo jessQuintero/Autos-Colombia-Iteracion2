@@ -93,7 +93,7 @@ public class Bitacora {
     
       @Override
     public String toString(){
-        return "\nClientes {"+ "id= "+id+", placa= "+placa+", fecha="+fecha+", hora= "+hora+", movimiento= "+movimiento+"}";
+        return "\nBitacoras {"+ "id= "+id+", placa= "+placa+", fecha="+fecha+", hora= "+hora+", movimiento= "+movimiento+"}";
         
         
     }

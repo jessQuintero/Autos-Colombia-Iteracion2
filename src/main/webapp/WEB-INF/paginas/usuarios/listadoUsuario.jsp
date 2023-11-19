@@ -18,7 +18,7 @@
 
                                 <th>Apellido</th>
                                 <th>Correo</th>
-                                <th>Clave</th>
+                               
                                  <th>      </th>
                                
 
@@ -35,7 +35,7 @@
                                     <td>${usuario.nombre}</td>
                                     <td>${usuario.apellido}</td>
                                     <td>${usuario.correo}</td>
-                                    <td>${usuario.clave}</td>
+                                 
                                     <td>
                                         <a href="${pageContext.request.contextPath}/UsuarioServlet?accion=editar&id=${usuario.id}"
                                            class="btn btn-secondary">

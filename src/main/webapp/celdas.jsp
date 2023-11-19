@@ -1,5 +1,5 @@
 <%-- 
-    Document   : bitacoras.jsp
+    Document   : celdas.jsp
     
 --%>
 
@@ -30,25 +30,19 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://kit.fontawesome.com/f90d3bf50d.js" crossorigin="anonymous"></script>
 
-        
-
-             
-         
-             
-        
+  
+       
              
    
              
         
         
-        <title>Bitacora</title>
+        
+        <title>Celda</title>
     </head>
     <body>
       
-   
-  
-        
-                
+
   
         <!--Cabecero-->
         <jsp:include page="WEB-INF/paginas/comunes/cabecero.jsp"/>
@@ -58,7 +52,7 @@
         <div class="row">
             <div class="col-md-6">
                 <h1>
-                    <i class="fas fa-cog"></i> Modulo de Bitacora</h1>
+                    <i class="fas fa-cog"></i> Modulo de Celda</h1>
             </div>
         </div>
     </div>
@@ -70,16 +64,16 @@
         <div class="row">
             <div class="col-md-3">
                 <a href="#" class="btn btn-primary btn-block"
-                   data-toggle="modal" data-target="#agregarBitacoraModal">
-                    <i class="fas fa-plus"></i> Agregar Bitacora
+                   data-toggle="modal" data-target="#agregarCeldaModal">
+                    <i class="fas fa-plus"></i> Agregar Celda
                 </a>
             </div>
         </div>
     </div>
 </section>
 
-        <!--Listado Bitacora de Vehiculos -->
-        <jsp:include page="WEB-INF/paginas/bitacoras/listadoBitacora.jsp"/>
+        <!--Listado Celdas -->
+        <jsp:include page="WEB-INF/paginas/celdas/listadoCelda.jsp"/>
 
         <!--Pie de Pagina-->
         <jsp:include page="WEB-INF/paginas/comunes/piePagina.jsp"/>

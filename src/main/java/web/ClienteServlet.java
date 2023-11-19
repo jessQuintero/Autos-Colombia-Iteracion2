@@ -74,7 +74,7 @@ public class ClienteServlet extends HttpServlet {
         HttpSession sesion = request.getSession();
         sesion.setAttribute("clientes", clientes);
        
-        response.sendRedirect("clientes.jsp");
+       response.sendRedirect("clientes.jsp");
     }
  
  
@@ -141,6 +141,16 @@ public class ClienteServlet extends HttpServlet {
                     }
                 }
                     break;
+                    
+                     case "listar":
+                {
+                    try {
+                     this.accionDefault(request, response);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(ClienteServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                    break; 
 
                 default:
                 {

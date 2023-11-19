@@ -35,16 +35,7 @@ public class UsuarioServlet extends HttpServlet {
                 }
                     break;
                     
-        case "ingresar":
-                {
-                    try {
-                        this.verificar(request, response);
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                    break;       
-                    
+                
                     
 
                 case "eliminar":
@@ -92,23 +83,7 @@ public class UsuarioServlet extends HttpServlet {
  
  
  
- protected void service(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String tipo = request.getParameter("tipo");
-		
-		if ("iniciarSesion".equals(tipo)) {
-                    try {
-                        this.verificar(request,response);
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-		} else if ("cerrarSesion".equals(tipo)) {
-			this.cerrarSesion(request, response);
-		}
-	}
- 
- 
- 
+  
   private void verificar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
       
@@ -122,20 +97,14 @@ public class UsuarioServlet extends HttpServlet {
        System.out.println("Datos enviados = " + cedula+" "+clave);
       
         Usuario usuario = new UsuarioDaoJDBC().iniciarSesion(cedula,clave);
-      //  System.out.println("usuarios = " + usuario);
-      //  HttpSession sesion = request.getSession();
-     //   sesion.setAttribute("usuarios", usuario);
-       
-      //  response.sendRedirect("principal.jsp");
-                
-       
+            
         if (usuario == null) {
 			request.setAttribute("mensaje", "Error nombre de usuario y/o clave");
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else {
             
                         HttpSession sesion = request.getSession();
-			sesion.setAttribute("usuario", usuario);
+			sesion.setAttribute("sesion", usuario);
             
 			response.sendRedirect("principal.jsp");
 		}
@@ -143,12 +112,7 @@ public class UsuarioServlet extends HttpServlet {
                 
     }
  
- private void cerrarSesion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession sesion = request.getSession();
-		sesion.invalidate();
-		request.setAttribute("mensaje", "");
-		request.getRequestDispatcher("index.jsp").forward(request, response);
-	}
+ 
  
   
   
@@ -167,10 +131,10 @@ public class UsuarioServlet extends HttpServlet {
         
 
         //Creamos el objeto (modelo)
-        Usuario usuario = new Usuario(id, cedula, nombre, apellido, correo, clave);
+        Usuario usuarios = new Usuario(id, cedula, nombre, apellido, correo, clave);
 
         //Modificar el  objeto en la base de datos
-        int registrosModificados = new UsuarioDaoJDBC().actualizar(usuario);
+        int registrosModificados = new UsuarioDaoJDBC().actualizar(usuarios);
         System.out.println("registrosModificados = " + registrosModificados);
 
         //Redirigimos hacia accion por default
@@ -184,8 +148,8 @@ public class UsuarioServlet extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException {
         //
         int id = Integer.parseInt(request.getParameter("id"));
-        Usuario usuario = new UsuarioDaoJDBC().encontrar(new Usuario(id));
-        request.setAttribute("usuario", usuario);
+        Usuario usuarios = new UsuarioDaoJDBC().encontrar(new Usuario(id));
+        request.setAttribute("usuario", usuarios);
         String jspEditar = "/WEB-INF/paginas/usuarios/editarUsuario.jsp";
         request.getRequestDispatcher(jspEditar).forward(request, response);
     }
@@ -211,18 +175,7 @@ public class UsuarioServlet extends HttpServlet {
                     }
                 }
                     break;
-                    
-                    
-                case "ingresar":
-                {
-                    try {
-                        this.verificar(request, response);
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                    break;
-
+                
                 case "modificar":
                 {
                     try {
@@ -233,6 +186,28 @@ public class UsuarioServlet extends HttpServlet {
                 }
                     break;
 
+                case "listar":
+                {
+                    try {
+                     this.accionDefault(request, response);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                    break;         
+                    
+                   
+                case "ingresar":
+                {
+                    try {
+                        this.verificar(request, response);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                    break;       
+                        
+                    
                 default:
                 {
                     try {
@@ -264,10 +239,10 @@ public class UsuarioServlet extends HttpServlet {
         String clave = request.getParameter("clave");
       
         //Creamos el objeto (modelo)
-        Usuario usuario = new Usuario(cedula, nombre, apellido, correo,clave);
+        Usuario usuarios = new Usuario(cedula, nombre, apellido, correo,clave);
 
         //Insertamos el nuevo objeto en la base de datos
-        int registrosModificados = new UsuarioDaoJDBC().insertar(usuario);
+        int registrosModificados = new UsuarioDaoJDBC().insertar(usuarios);
         System.out.println("registrosModificados = " + registrosModificados);
 
         //Redirigimos hacia accion por default
@@ -283,9 +258,9 @@ public class UsuarioServlet extends HttpServlet {
      
 
         //Creamos el objeto
-        Usuario usuario = new Usuario(id);
+        Usuario usuarios = new Usuario(id);
       
-        int registrosModificados = new UsuarioDaoJDBC().eliminar(usuario);
+        int registrosModificados = new UsuarioDaoJDBC().eliminar(usuarios);
         System.out.println("registrosModificados = " + registrosModificados);
 
         //Redirigimos hacia accion por default

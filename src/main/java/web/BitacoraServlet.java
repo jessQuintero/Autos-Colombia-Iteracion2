@@ -48,7 +48,8 @@ public class BitacoraServlet extends HttpServlet {
         }
     }
  
- 
+ //Redirigimos hacia accion por default
+  //      this.accionDefault(request, response);
  
  
  private void accionDefault(HttpServletRequest request, HttpServletResponse response)
@@ -57,8 +58,8 @@ public class BitacoraServlet extends HttpServlet {
         System.out.println("bitacoras = " + bitacoras);
         HttpSession sesion = request.getSession();
         sesion.setAttribute("bitacoras", bitacoras);
-       
-        response.sendRedirect("bitacora.jsp");
+       request.getRequestDispatcher("bitacora.jsp").forward(request, response);
+      // response.sendRedirect("bitacora.jsp");
     }
  
   
@@ -82,6 +83,21 @@ public class BitacoraServlet extends HttpServlet {
                 }
                     break;
 
+                    
+                  case "listar":
+                {
+                    try {
+                     this.accionDefault(request, response);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(BitacoraServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                    break;    
+                    
+                    
+                    
+                    
+                    
                 default:
                 {
                     try {

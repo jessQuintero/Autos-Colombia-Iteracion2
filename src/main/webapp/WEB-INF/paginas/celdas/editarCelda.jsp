@@ -8,13 +8,13 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://kit.fontawesome.com/f90d3bf50d.js" crossorigin="anonymous"></script>
 
-        <title>Editar Usuario</title>
+        <title>Editar Celda</title>
     </head>
     <body>
         <!--Cabecero-->
         <jsp:include page="/WEB-INF/paginas/comunes/cabecero.jsp"/>
 
-        <form action="${pageContext.request.contextPath}/UsuarioServlet?accion=modificar&id=${usuario.id}"
+        <form action="${pageContext.request.contextPath}/CeldaServlet?accion=modificar&id=${celda.id}"
               method="POST" class="was-validated">
 
             <!--Botones de Navegacion -->
@@ -26,29 +26,39 @@
                         <div class="col">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4>Editar Usuario</h4>
+                                    <h4>Editar Celda</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="cedula">Cedula</label>
-                                        <input type="number" class="form-control" name="cedula"  min="1000000" max="9999999999" required value="${usuario.cedula}">
+                                        <label for="ubicacion">Ubicacion</label>
+                                        <input type="text" class="form-control" name="ubicacion" minlength="3" maxlength="3" required value="${celda.ubicacion}">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="nombre">Nombre</label>
-                                        <input type="text" class="form-control" name="nombre" required value="${usuario.nombre}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="apellido">Apellido</label>
-                                        <input type="text" class="form-control" name="apellido" required value="${usuario.apellido}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="correo">Correo</label>
-                                        <input type="email" class="form-control" name="correo" required value="${usuario.correo}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="clave">Clave</label>
-                                        <input type="password" class="form-control" name="clave" placeholder="Minimo 6 caracter entre Mayuscula, minuscula y numeros" pattern="[A-Za-z][A-Za-z0-9]*[0-9][A-Za-z0-9]*" required value="${usuario.clave}">
-                                    </div>
+                                  
+                                    
+                                   <div class="form-group">
+                     <label for="piso">Piso</label>
+                    <select name="piso" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" value="${celda.piso}" required>
+ 
+                    <option value="Primero">Primer Piso</option>
+                    <option value="Segundo">Segundo Piso</option>
+
+                  </select>
+                     
+                    </div>         
+                        
+                    
+                     <div class="form-group">
+                     <label for="tipo">Tipo Vehiculo</label>
+                    <select name="tipo" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" value="${celda.tipo}" required>
+ 
+                    <option value="Carro">Carro</option>
+                    <option value="Moto">Moto</option>
+
+                  </select>
+                     
+                 </div>      
+                                    
+                                    
                                     
                                 </div>
                             </div>

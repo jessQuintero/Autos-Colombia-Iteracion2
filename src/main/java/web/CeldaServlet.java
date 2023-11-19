@@ -1,7 +1,7 @@
 package web;
 
-import datos.VehiculoDaoJDBC;
-import dominio.Vehiculo;
+import datos.CeldaDaoJDBC;
+import dominio.Celda;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,8 +15,8 @@ import java.util.logging.Logger;
 
 
 
-@WebServlet(urlPatterns = {"/VehiculoServlet"})
-public class VehiculoServlet extends HttpServlet {
+@WebServlet(urlPatterns = {"/CeldaServlet"})
+public class CeldaServlet extends HttpServlet {
 
 
  @Override
@@ -28,9 +28,9 @@ public class VehiculoServlet extends HttpServlet {
                 case "editar":
                 {
                     try {
-                        this.editarVehiculo(request, response);
+                        this.editarCelda(request, response);
                     } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(VehiculoServlet.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(CeldaServlet.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                     break;
@@ -38,9 +38,9 @@ public class VehiculoServlet extends HttpServlet {
                 case "eliminar":
                 {
                     try {
-                        this.eliminarVehiculo(request, response);
+                        this.eliminarCelda(request, response);
                     } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(VehiculoServlet.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(CeldaServlet.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                     break;
@@ -50,7 +50,7 @@ public class VehiculoServlet extends HttpServlet {
                     try {
                         this.accionDefault(request, response);
                     } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(VehiculoServlet.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(CeldaServlet.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
 
@@ -59,7 +59,7 @@ public class VehiculoServlet extends HttpServlet {
             try {
                 this.accionDefault(request, response);
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(VehiculoServlet.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CeldaServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -69,31 +69,34 @@ public class VehiculoServlet extends HttpServlet {
  
  private void accionDefault(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
-        List<Vehiculo> vehiculos = new VehiculoDaoJDBC().listar();
-        System.out.println("vehiculos = " + vehiculos);
+        List<Celda> celdas = new CeldaDaoJDBC().listar();
+        System.out.println("celdas = " + celdas);
         HttpSession sesion = request.getSession();
-        sesion.setAttribute("vehiculos", vehiculos);
+        sesion.setAttribute("celdas", celdas);
        
-        response.sendRedirect("vehiculos.jsp");
+        response.sendRedirect("celdas.jsp");
     }
  
  
- private void modificarVehiculo(HttpServletRequest request, HttpServletResponse response)
+ private void modificarCelda(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
         //recuperamos los valores del formulario 
         int id = Integer.parseInt(request.getParameter("id"));
-        String placa = request.getParameter("placa");
-        String color = request.getParameter("color");
-        String marca = request.getParameter("marca");
-        String modelo = request.getParameter("modelo");
+        
+        
+        String ubicacion = request.getParameter("ubicacion");
+          String piso = request.getParameter("piso");
+        String tipo = request.getParameter("tipo");
+      
+       
       
         
 
         //Creamos el objeto (modelo)
-        Vehiculo vehiculos = new Vehiculo(id,placa, color, marca, modelo);
+        Celda celda = new Celda(id, ubicacion, piso, tipo);
 
         //Modificar el  objeto en la base de datos
-        int registrosModificados = new VehiculoDaoJDBC().actualizar(vehiculos);
+        int registrosModificados = new CeldaDaoJDBC().actualizar(celda);
         System.out.println("registrosModificados = " + registrosModificados);
 
         //Redirigimos hacia accion por default
@@ -103,13 +106,13 @@ public class VehiculoServlet extends HttpServlet {
  
  
  
- private void editarVehiculo(HttpServletRequest request, HttpServletResponse response)
+ private void editarCelda(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
         //
         int id = Integer.parseInt(request.getParameter("id"));
-        Vehiculo vehiculos = new VehiculoDaoJDBC().encontrar(new Vehiculo(id));
-        request.setAttribute("vehiculo", vehiculos);
-        String jspEditar = "/WEB-INF/paginas/vehiculos/editarVehiculo.jsp";
+        Celda celda = new CeldaDaoJDBC().encontrar(new Celda(id));
+        request.setAttribute("celda", celda);
+        String jspEditar = "/WEB-INF/paginas/celdas/editarCelda.jsp";
         request.getRequestDispatcher(jspEditar).forward(request, response);
     }
  
@@ -123,9 +126,9 @@ public class VehiculoServlet extends HttpServlet {
                 case "insertar":
                 {
                     try {
-                        this.insertarVehiculo(request, response);
+                        this.insertarCelda(request, response);
                     } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(VehiculoServlet.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(CeldaServlet.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                     break;
@@ -133,29 +136,30 @@ public class VehiculoServlet extends HttpServlet {
                 case "modificar":
                 {
                     try {
-                        this.modificarVehiculo(request, response);
+                        this.modificarCelda(request, response);
                     } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(VehiculoServlet.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(CeldaServlet.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                     break;
-
-                    case "listar":
+                    
+                    
+                     case "listar":
                 {
                     try {
                      this.accionDefault(request, response);
                     } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(VehiculoServlet.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(CeldaServlet.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                    break;  
-                    
+                    break; 
+
                 default:
                 {
                     try {
                         this.accionDefault(request, response);
                     } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(VehiculoServlet.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(CeldaServlet.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
 
@@ -164,26 +168,27 @@ public class VehiculoServlet extends HttpServlet {
             try {
                 this.accionDefault(request, response);
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(VehiculoServlet.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CeldaServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
     
     
     
-    private void insertarVehiculo(HttpServletRequest request, HttpServletResponse response)
+    private void insertarCelda(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
         //recuperamos los valores del formulario 
-        String placa = request.getParameter("placa");
-        String color = request.getParameter("color");
-        String marca = request.getParameter("marca");
-        String modelo = request.getParameter("modelo");
-      
+        
+        String ubicacion = request.getParameter("ubicacion");
+        String piso = request.getParameter("piso");
+        String tipo = request.getParameter("tipo");
+        
+        
         //Creamos el objeto (modelo)
-        Vehiculo vehiculos = new Vehiculo(placa, color, marca, modelo);
+        Celda celda = new Celda(ubicacion, piso, tipo);
 
         //Insertamos el nuevo objeto en la base de datos
-        int registrosModificados = new VehiculoDaoJDBC().insertar(vehiculos);
+        int registrosModificados = new CeldaDaoJDBC().insertar(celda);
         System.out.println("registrosModificados = " + registrosModificados);
 
         //Redirigimos hacia accion por default
@@ -192,16 +197,16 @@ public class VehiculoServlet extends HttpServlet {
     
     
     
-    private void eliminarVehiculo(HttpServletRequest request, HttpServletResponse response)
+    private void eliminarCelda(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
         //recuperamos los valores del formulario 
         int id = Integer.parseInt(request.getParameter("id"));
      
 
         //Creamos el objeto
-        Vehiculo vehiculos = new Vehiculo(id);
+        Celda celda = new Celda(id);
       
-        int registrosModificados = new VehiculoDaoJDBC().eliminar(vehiculos);
+        int registrosModificados = new CeldaDaoJDBC().eliminar(celda);
         System.out.println("registrosModificados = " + registrosModificados);
 
         //Redirigimos hacia accion por default
